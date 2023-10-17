@@ -44,7 +44,7 @@ public class DukcapilServiceImpl implements DukcapilIService {
     @Override
     public DukcapilDto getNIKByNIK(String nik) {
         Dukcapil dukcapil = repository.findByNik(nik).orElseThrow(
-                () -> new OpenApiResourceNotFoundException("NIK not found")
+                () -> new OpenApiResourceNotFoundException("NIK Tidak Ditemukan")
         );
         return AutoDukcapilMapper.MAPPER.mapToDukcapilDto(dukcapil);
     }
@@ -73,4 +73,18 @@ public class DukcapilServiceImpl implements DukcapilIService {
     public List<Dukcapil> getAllNIK() {
         return repository.findAll();
     }
+
+    @Override
+    public DukcapilDto validateNIK(DukcapilDto nik) {
+        Optional<Dukcapil> optionalDukcapil = repository.findByNik(nik.getNik());
+
+        if (optionalDukcapil.isPresent()) {
+            Dukcapil dukcapil = optionalDukcapil.get();
+            return AutoDukcapilMapper.MAPPER.mapToDukcapilDto(dukcapil);
+        } else {
+            throw new OpenApiResourceNotFoundException("NIK Tidak Ditemukan");
+        }
+    }
+
+
 }

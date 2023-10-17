@@ -19,4 +19,6 @@ public interface DukcapilIService {
     void deleteNIK(String nik);
 
     List<Dukcapil> getAllNIK();
+
+    DukcapilDto validateNIK(DukcapilDto dukcapil);
 }
