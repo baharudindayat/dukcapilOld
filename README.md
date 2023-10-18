@@ -14,7 +14,7 @@ API contract
 
 Get Validation Nik
 
-POST : localhost:5433/dukcapil/validate
+POST : PATCH /dukcapil/validate
 ----
 Return validation nik from system.
 * Url Params
